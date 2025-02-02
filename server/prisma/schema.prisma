@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model blog {
+  id          Int      @id
+  img         String?  @db.VarChar(100)
+  title       String   @unique @db.VarChar(90)
+  content     String   @unique @db.VarChar(1200)
+  ispublished Boolean  @default(false)
+  createdat   DateTime @db.Date
+  updatedat   DateTime @db.Date
+}
+
+model user {
+  id        Int      @id(map: "users_pkey")
+  username  String   @unique(map: "users_username_key") @db.VarChar(50)
+  email     String   @unique(map: "users_email_key") @db.VarChar(255)
+  password  String   @db.Char(64)
+  createdat DateTime @default(dbgenerated("CURRENT_DATE")) @db.Date
+}
