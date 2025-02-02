@@ -1,2 +1,1 @@
-# Blogapp
-minimalist blogging web application
+## Blog-app
